@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
 
-const { TwitterBot } = require('./twitter-bot');
+const { TwitterBot } = require('./twitter-bot.js');
 
 const PORT = 3000;
 
 const twitterBot = new TwitterBot({
-    consumer_key: 'uk0MOLxVRHKjwAtt2sBb7PYgQ',
-    consumer_secret: 'TxEDzgfaUJBWjipuoJkdZEAg5Og6oUqMNAjYbR9vZGaqFKVmaV',
-    access_token: '316918910-pMxDwxgO03zeiPCf5bOui9eI8KFdPSXsXj9Ub1yN',
-    access_token_secret: 'NvluVm6RqcJIG5yqD6iBIVrgqbjqC3PpX66oJqLJz2oar'
+    consumer_key: 'bIZMqQ2O25sArTqmEXYc5uGMm',
+    consumer_secret: 'PnVf08NzMfhdEzgSjUDqf2SckLme7wVc4CR6nhZswvrMyaIrQp',
+    access_token: '316918910-okcKlrmYgg3XIjoyIpT6idS9zrs4G1Fj8l3AyyhH',
+    access_token_secret: 'LuVKDrTqcoSGZ1pNZ13URyVMgawNgPWS7wPCAfCXj4DDU'
 })
 
 app.get('/', (req,res,nex) => {
@@ -22,4 +22,4 @@ app.get('/adminProfile', async(req,res,nex) => {
 });
 
 app.listen(PORT, () => console.log('server is listening bro to port'));
-
+ 
