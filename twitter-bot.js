@@ -11,8 +11,8 @@ class TwitterBot {
     }
 
     getAdminUserInfo = () => { 
-        return new Promise((resolve, reject) =>{
-            this.T.get('account/verify_credentials', {skip_status: true})
+        return new Promise((resolve, reject) => {
+            this.T.get('account/verify_credentials', { skip_status: true })
                 .then(result => {
                     resolve(result);
                 })
@@ -22,6 +22,7 @@ class TwitterBot {
         })
 
     }
+
 
 }
 

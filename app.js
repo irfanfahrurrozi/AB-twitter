@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 
-const { TwitterBot } = require('./twitter-bot.js');
+const { TwitterBot } = require('./twitter-bot');
 
 const PORT = 3000;
 
@@ -16,7 +16,7 @@ app.get('/', (req,res,nex) => {
     res.send('welcome to twitter bot brohh zzzsuerrr123');
 });
 
-app.get('/adminProfile', async(req,res,nex) => {
+app.get('/adminProfile', async(req, res, nex) => {
     const admin = await twitterBot.getAdminUserInfo();
     res.json(admin);
 });
