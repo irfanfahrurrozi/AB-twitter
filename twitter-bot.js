@@ -23,7 +23,6 @@ class TwitterBot {
 
     }
 
-
 }
 
 module.exports = { TwitterBot };
