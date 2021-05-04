@@ -7,7 +7,7 @@ const { TwitterBot } = require('./twitter-bot');
 const PORT = 3000;
 
 
-const twitterBot = new TwitterBot({
+const bot = new TwitterBot({
     consumer_key: 'bIZMqQ2O25sArTqmEXYc5uGMm',
     consumer_secret: 'PnVf08NzMfhdEzgSjUDqf2SckLme7wVc4CR6nhZswvrMyaIrQp',
     access_token: '316918910-okcKlrmYgg3XIjoyIpT6idS9zrs4G1Fj8l3AyyhH',
@@ -22,8 +22,11 @@ const job = new CronJob(
 );
 
 
-function doJob() {
-console.log('trigger broo');
+async function doJob() {
+    const authenticatedUser = await bot.getAdminUserInfo();
+    const dm = await bot.getDirectMessage();
+    console.log(dm);
+  
 };
 
 

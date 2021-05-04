@@ -23,6 +23,18 @@ class TwitterBot {
 
     }
 
+    getDirectMessage = () => {
+        return new Promise((resolve, reject) => {
+            this.T.get('direct_messages/events/list', (error, data) => {
+                if(!error) { 
+                    resolve(data);
+                } else {
+                    reject('ada error pas minta dm');
+                }
+            })
+        })
+    }
+
 }
 
 module.exports = { TwitterBot };
