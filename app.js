@@ -31,11 +31,24 @@ const job = new CronJob(
 
 
 async function doJob() {
-    const authenticatedUserId = await bot.getAdminUserInfo();
-    const dm = await bot.getDirectMessage(authenticatedUserId);
-    // for (const message of dm.events) {
-    //     console.log(message.message_create, '<<< msg');
-    // }
+    try {
+        const authenticatedUserId = await bot.getAdminUserInfo();
+        const message = await bot.getDirectMessage(authenticatedUserId);
+        
+        // for (const message of dm.events) {
+        console.log(JSON.stringify(message, null, 2), '<<<<<< ini message nya pake media');
+        // }
+        if (message.id){
+            await bot.tweetMessage(message);
+        } else {
+            console.log('no tweet post --------xxxx----------')
+        }
+    } catch (error) {
+        console.log(error);
+        console.log('---------------ERROR---------------')
+    }
+    
+    
   
 };
 
