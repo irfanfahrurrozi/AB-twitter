@@ -13,6 +13,7 @@ const bot = new TwitterBot({
     access_token: '316918910-Exc5TeNnEVyoqzYDhpCSEG5PwSsOzkuMYU3KfQGg',
     access_token_secret: '60VlBbY4ojdAZbBegqo8Ru0RG4WzdsZ1UfOW4sJcSNJHd',
     triggerWord: 'mas'
+    
     //API Fhz useless
     //consumer_key: 'bIZMqQ2O25sArTqmEXYc5uGMm',
     //consumer_secret: 'PnVf08NzMfhdEzgSjUDqf2SckLme7wVc4CR6nhZswvrMyaIrQp',
