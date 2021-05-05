@@ -8,10 +8,16 @@ const PORT = 3000;
 
 
 const bot = new TwitterBot({
-    consumer_key: 'bIZMqQ2O25sArTqmEXYc5uGMm',
-    consumer_secret: 'PnVf08NzMfhdEzgSjUDqf2SckLme7wVc4CR6nhZswvrMyaIrQp',
-    access_token: '316918910-okcKlrmYgg3XIjoyIpT6idS9zrs4G1Fj8l3AyyhH',
-    access_token_secret: 'LuVKDrTqcoSGZ1pNZ13URyVMgawNgPWS7wPCAfCXj4DDU'
+    consumer_key: 'nMB6M3Dnney5XrJldspQ852Mb',
+    consumer_secret: 'zzZW9g4D2ib8zM7Fv6J100Sy2e57v0vX7zKDMJ6XsLLp922cbs',
+    access_token: '316918910-Exc5TeNnEVyoqzYDhpCSEG5PwSsOzkuMYU3KfQGg',
+    access_token_secret: '60VlBbY4ojdAZbBegqo8Ru0RG4WzdsZ1UfOW4sJcSNJHd'
+    
+    //API Fhz useless
+    //consumer_key: 'bIZMqQ2O25sArTqmEXYc5uGMm',
+    //consumer_secret: 'PnVf08NzMfhdEzgSjUDqf2SckLme7wVc4CR6nhZswvrMyaIrQp',
+    //access_token: '316918910-okcKlrmYgg3XIjoyIpT6idS9zrs4G1Fj8l3AyyhH',
+    //access_token_secret: 'LuVKDrTqcoSGZ1pNZ13URyVMgawNgPWS7wPCAfCXj4DDU'
 })
 
 const job = new CronJob(
@@ -23,9 +29,11 @@ const job = new CronJob(
 
 
 async function doJob() {
-    const authenticatedUser = await bot.getAdminUserInfo();
-    const dm = await bot.getDirectMessage();
-    console.log(dm);
+    const authenticatedUserId = await bot.getAdminUserInfo();
+    const dm = await bot.getDirectMessage(authenticatedUserId);
+    // for (const message of dm.events) {
+    //     console.log(message.message_create, '<<< msg');
+    // }
   
 };
 
