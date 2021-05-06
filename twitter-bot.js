@@ -1,5 +1,6 @@
 const Twit = require('twit');
 const { downloadMedia } = require('./download');
+const fs = require('fs');
 
 class TwitterBot {
     constructor(props){
@@ -92,6 +93,32 @@ class TwitterBot {
         })
     }
 
+    uploadMedia = (filePath, type) => {
+        return new Promise((resolve, reject) => {
+            console.log('Media lagi di-upload nih ... ');
+            const b64content = fs.readFileSync(filePath, {encoding: 'base64'});
+            if (type === 'photo'){
+                this.T.post('media/upload', {media_data: b64content}, (error,data) => {
+                    if(!error) {
+                        resolve(data);
+                        console.log('Media udah di upload broh ... ');
+                    } else {
+                        reject(error);
+                    }
+                })
+            } else {
+                this.T.postMediaChunked({file_path: filePath}, (error, data) => {
+                    if(!error){
+                        resolve(data);
+                        console.log('Media udah di upload broh ... ');
+                    } else {
+                        reject(error);
+                    }
+                })
+            }
+        })
+    }
+
     tweetMessage =  (message) => {
         return new Promise(async (resolve, reject) => {
             try {
@@ -107,8 +134,8 @@ class TwitterBot {
                     const shortUrl = attachment.media.url;
                     payLoad.status = text.split(shortUrl)[0];
                     const type = attachment.media.type;
-                    let media_url = '';
-                    const mediaUrl = attachment.media.media_url;
+                    let mediaUrl = '';
+                    //const mediaUrl = attachment.media.media_url;
 
                     if (type === 'animated_gif'){
                         mediaUrl = media.video_info.variants[0].url;
@@ -122,27 +149,33 @@ class TwitterBot {
 
                     console.log(mediaUrl, 'media url <<<<<<<<<<<<');
                     console.log(fileName, 'file Name <<<<<<<<<<<<');
-                    console.log('DOWNLOADING MEDIA');
+                   
 
 
                    await downloadMedia(mediaUrl, fileName);
-                     console.log('MEDIA UDAH DI DOWNLOAD')
+                     
 
+                    const uploadedMedia = await this.uploadMedia(fileName, type);
+                    console.log(uploadedMedia, 'media yg diupload <<<<<<<')
+
+                    fs.unlinkSync(fileName);
+                    console.log ('media udah dihapus nih dari data lokal kita');
+                    payLoad.media_ids = [ uploadedMedia.media_id_string];
 
                 } 
 
                 resolve();
                 
-                // this.T.post('statuses/update', payLoad, (error, data) => {
-                //     if(!error) {
-                //         console.log('"Berhasil mengirimkan Tweet uwu dengan DM id ${message.id}')
-                //         resolve({
-                //             message: "Berhasil mengirimkan Tweet uwu dengan DM id ${message.id}"
-                //         })
-                //     } else {
-                //         reject(error);
-                //     }
-                // })
+                this.T.post('statuses/update', payLoad, (error, data) => {
+                    if(!error) {
+                        console.log('"Berhasil mengirimkan Tweet uwu dengan DM id ${message.id}')
+                        resolve({
+                            message: "Berhasil mengirimkan Tweet uwu dengan DM id ${message.id}"
+                        })
+                    } else {
+                        reject(error);
+                    }
+                })
 
             } catch (error) {
                 reject(error);

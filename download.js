@@ -28,6 +28,7 @@ const OAuthHelper = ( mediaUrl ) => {
 
 const downloadMedia = async (mediaUrl, fileName) => {
     try {
+        console.log('DOWNLOADING MEDIA uwu');
     
         const authorization = OAuthHelper(mediaUrl);
         const {data} = await axios.get(
@@ -38,6 +39,7 @@ const downloadMedia = async (mediaUrl, fileName) => {
             }
         ) 
         fs.writeFileSync(fileName, data);
+        console.log('MEDIA UDAH DI DOWNLOAD nih');
         return data;
 
     } catch (error) {
