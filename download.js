@@ -17,7 +17,7 @@ const OAuthHelper = ( mediaUrl ) => {
 
     const authorization = oauth.authorize({
         url: mediaUrl,
-        method: 'GET',
+        method: 'GET'
     }, {
         key: '316918910-Exc5TeNnEVyoqzYDhpCSEG5PwSsOzkuMYU3KfQGg',
         secret: '60VlBbY4ojdAZbBegqo8Ru0RG4WzdsZ1UfOW4sJcSNJHd'
@@ -41,7 +41,7 @@ const downloadMedia = async (mediaUrl, fileName) => {
         return data;
 
     } catch (error) {
-        throw new Error('error from downloading media');
+        //throw new Error('error from downloading media');
     }
 }
 

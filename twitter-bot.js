@@ -93,7 +93,7 @@ class TwitterBot {
     }
 
     tweetMessage =  (message) => {
-        return new Promise( async(resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
             try {
                     const text = message.message_create.message_data.text;
                     const attachment = message.message_create.message_data.attachment;
@@ -115,7 +115,7 @@ class TwitterBot {
                     } else if(type === 'video'){
                         mediaUrl = media.video_info.variants[0].url.split('?')[0];
                     } else {
-                        mediaUrl = attachment.media.media_url;
+                        mediaUrl = attachment.media.media_url_https;
                     }
                     const splittedUrl = mediaUrl.split('/');
                     const fileName = splittedUrl[splittedUrl.length - 1];
@@ -125,8 +125,8 @@ class TwitterBot {
                     console.log('DOWNLOADING MEDIA');
 
 
-                    await downloadMedia(mediaUrl, fileName);
-                    console.log('MEDIA UDAH DI DOWNLOAD')
+                   await downloadMedia(mediaUrl, fileName);
+                     console.log('MEDIA UDAH DI DOWNLOAD')
 
 
                 } 
